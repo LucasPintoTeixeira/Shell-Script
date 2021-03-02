@@ -1,0 +1,307 @@
+
+PESCA DOS COMANDOS - BASELINE
+LIVRO DE MÃO DOS COMANDO LINUX
+
+Informações importantes do Curso de Shell Script
+
+- Somente o superusuário define shell para os outros usupários
+- Exit e logaut são diferentes ctrl + d = logoult
+
+- passwd
+Altera a senha do usário, somente o dono do usuário altera a própria senha ou o superusuário. passwd também define período de validade da conta ou senha.
+O usuário comum precisa solicitar a senha antiga se já houver uma.
+Caso contrário somente o superusuário poderá.
+
+-  Principais opções do comando
+-d > --delete (Deleta a senha de uma conta deixando-a vazia, uma forma de desativer uma conta rapindamente).
+
+-e > --expire (Expira a senha de um usuário imediatamente obrigado-o a recirar a senha no próximo logon).
+[Verificar Script para troca de senha de todos os usuários do Linux]
+
+
+-i --inative (inativar um conta, por senha expirada)
+
+
+-l --lock (Acrescenta um ! no início da senha tornando-a inválida)
+
+
+-q ???
+
+-r repository --????
+
+R- ?????
+
+
+-s --Status (Status de uma conta de usuário)
+
+- Unlook remove o ! da senha
+
+-w  Worn Days (Avisar x dias antes da senha se alterada sobre a necessidade de alteração)
+
+-X max Day (Máximo de dias de validade de uma senha)
+
+
+Arquivos de configuraçoes envolvidos com o passwd
+
+/etc/passwd
+
+/etc/shadow
+
+/etc/pam.d/passwd (PAM configurações do passwd)
+
+
+
+--------------------------------------------------------------------------
+Formas de comando no Linux
+
+Só o comando
+Comando e Opção
+Comando e Argumentos
+
+(Todos os comando do bash)
+
+
+Whatis
+man
+apropos
+help
+
+O man page aceita comandos de para manizear a p[ágina de manual.
+
+
+
+
+
+----------------------------------------------------------------------------
+				MANIPULANDO ARQUIVOS E DIRETÓRIOS
+----------------------------------------------------------------------------
+
+A base dos diretórios FHD é o /
+Diretório Raiz
+
+
+No Linux atual não há limite para criação de nomes de arquivos
+
+No antigos UNIX Padrão system V ( o padrão era14 caracteres), já no BSD O limite é de 256 Caracteres
+
+
+/ bin   Binário do sistema, comando compilados em C para utilização de usuário comum
+
+/etc arquivos de configuração globais
+
+/lib bibliotecas de Linux e de sistemas de terceiros
+
+/tmp arquivos temporários
+
+/home   arquivos de usupários (Arquivos de configuração de ambiente do usuário)
+
+/usr/bin   Uilitários
+
+/usr/sbin  utilitários root
+
+/dev  arquivos de disposirtivos (blocos)
+
+
+
+No línux não existe extenção, usamos por convenção de boas práticas
+
+
+PATHs Caminhos e diretórios
+
+. = diretório atual
+
+.. = diretório anterior
+
+
+/home/usuário é um caminho absolutos pois não depende de variável de ambiente.
+
+Podemos ter o caminho relativo onde a sequencia do coando pode ser feita a partir do diretório corrente (Através da variável de ambiente)
+
+
+PWD - Informa o diretórios corrente. 
+
+cd - Navegar deretórios (Poucas variações) somente algumas sobre links
+
+ls = dir = vdir (listam conteúdo de diretório)
+
+Principais opções:
+
+-F  informa no final de cada linha se é diretório ou executável comolanco um / ou * respectivamente
+
+-R  Lista os arquivos recursivamente.
+
+-a  inclui arquivos ocultos
+
+-c  usa o status de tempo de alteração e não de criação (usado com o -t ou -l)
+
+-d lista o nome do diretório ao invés dos arquivos
+
+-i mostra o inode
+
+-l longo
+
+-q mostra caracteres especiais
+
+
+-r inverte a ordem dos arquivos
+
+-t pelo rótulo de tempo
+
+-1 saida em 1 uma coluna simples
+
+Você pode usar isso em script transformando uma listagem em somente uma coluna.
+
+
+comando CP
+
+cp arquivo1 arquivo1 (Não faz nada)
+ -a preserva o máximo possivel de estrutura dos arquivos
+
+ -d Copia as lilgações simbolocas que o arquivo pode ter
+
+ -f remove os arquivos de destino se existentes e nunca pergunta antes
+
+ -i interativo, pergunta antes de sobrescrever
+
+ -p preserva os atrobutos do arquivo
+
+-P (inclui diretórios dentro da criação)
+
+-r Recursive
+
+-R recusivo (tudo) Cópia segura
+
+-V verbose
+
+--------------------------------------------------------------------------
+Comando MV
+--------------------------------------------------------------------------
+
+
+Nomralmente usado para renomear arquvos, mas também pode copiar e remover.
+
+Para checar o sucesso de uma cópia de arquivo devemos verificar o inode, se mudou é por que o arquivo voi copiado e o outro movido.
+
+
+ln cria links 
+
+-s simbolico (inode diferente)
+
+
+comando mkdir cria diretório
+
+comando rmdir excli diretório
+somente se estiver vazio
+
+
+COMANDO rm [Remove arquivos e diretórios]
+
+-f força e não pergunta
+
+-i pede confirmação para exclusão
+
+-r ou -R remove recusivamente
+
+-d É uma opção perigosa
+
+-v mostra antes de remover
+
+
+Grep 
+Busca padrões de informações dentro de arquivos [e-grep, fgrep e rgrep são variantes obsoletas compatível com grep -E grep -F grep -r]
+
+-V versão do grep
+
+-E informa que será usada uma expressão regular.
+
+-F interpretar padrões como estring fixas e não como expressões regulares
+
+-G - basic regex
+
+-P perl regex
+
+-e não entendi.
+
+-f Perquisar por arquivo
+
+-i ignorar case, tratar maiúsculas e minusculas como normal.
+
+-v inverte o sentido da pesquisa trazendo os não padrões
+
+-W 
+-X pesquisar exatamente o que se tem na string
+
+
+-c --count 
+
+
+
+Comando FIND [Localiza arquivos no sistema] Por nome ou por outras características
+
+Critérios: -name iname
+
+- user (usuário X como dono do arquivo)
+- group (por grupo)
+
+- type (Por tipo de arquivo) C, b, l, d, s, f ...
+
+- size (Por espaço usado no disco tamanho do arquivo)
+
+- actime acessados a X tempo
+
+- ctime status mu8dou
+
+-mtime modificados a x tempo
+
+
+Para usar mais de um critério de pesquisa você dever colocar espaço entre a pesquisa.
+
+
+Ações dos comandos
+
+-print [ Exibe na tela os arquivos encontrados] Esse é padrão do comando.
+
+-exec cmd {} \; Execute comandos com o resultados da Pesquisa.
+
+-ok cmd ... Questiona de moto interativo se pode executar o comandos.
+
+- printf formato 
+
+find . -type f -size +1000000c -atime +60 -exec {} \;
+
+printf ( formata saída de várias formas) Formata datas também.
+
+
+basename
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
