@@ -272,7 +272,77 @@ find . -type f -size +1000000c -atime +60 -exec {} \;
 printf ( formata saída de várias formas) Formata datas também.
 
 
-basename
+$ dirname [Retorna o nome do diretório] Esse comando é meio aleatório tem vezes que retorna o caminho absoluto e outras vezes o caminho 
+relativo
+
+
+Comandos que leem da entrada padrão (stdin=teclado) e escrevem na saída padrão (stdout=monitor) Na maioria da vezes esses comandos são
+Utilizados para modificar a saída de outros comandos e por isso são usados juntamente com outros comandos, cobinando a sua lógica, com
+a utilização de redirecionamentos e do próprio "|" (pipe)
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Esse comando são chamados também de filtros pois filtram informações formatando a saída de outros comandos.
+
+$ cat 	[Exibe o conteúdo de arquivos]
+
+$ wc 	[Faz a contagem de caracteres, paravras e linhas de arquivos]
+
+$ sort 	[Ordena o conteúdo de arquivos]
+
+$ read 	[Exibe as primeiras linhas dos arquivos]
+
+$ tail	[Exibe as linhas finais dos arquivos]
+
+Obs. Entenda-se arquivo com sendo tanto arquivo quando entrada principal (stdin)
+
+Se sua saída não for direcionada, será sempre a saída da tela.
+------------------------------------------------------------------------------------------------------------------------------------------
+
+$ cat [- pções] [Nome do Arquivo]
+	
+	Se houver vários arquivos, serão apresentado um a um e apresentados na saída padrão stdout
+	Pode ser usando para apresenar o que foi digitado na entrada parão (stdin) teclado.
+
+
+	-v mostra os caracteres sem prepresentação na tela.
+
+	-e mostra os feed de linha (Barra)
+
+	-t Mostra as tabulações
+
+	-n Numera as linhas
+
+	Pode ser usado para limpar o conteúdo de um arquivo, 
+	$ cat > arquivo [Será solicitada a digitação do que será inserido no arquivo, basta não digita nada e cancelar
+	a operação com ctrl + d]
+
+	Pode ser usado para ver caeacteres que não aparecem normalmente no prompt 
+
+	$ cat -vet > arquivo
+
+$ wc [lwc] [arquivo...]
+
+	Se não tiver arquivo o wc lê a entrada padrão(stdin)
+
+	Cuidado com a saída do echo, ele conta o \n no final do echo para que ele não conte esse caractere usade $ echo -n
+
+	usar a opção -m para contar caracteres de acordo a unidade.
+
+$ sort [] [] [] []  []
+
+	arq 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
