@@ -329,11 +329,201 @@ $ wc [lwc] [arquivo...]
 
 	usar a opção -m para contar caracteres de acordo a unidade.
 
-$ sort [] [] [] []  []
+$ sort [+n.m] [-n.m] [-mnr] [-t set]  [arqui...]
 
-	arq 
+	Se não tiver arquivo ele pega da entrada padrão stdin
+	arq Ordena o arquivo por padrão por ondem numerica caso seja visto números, ápós por ondem alfabética.
+
+	+n.m Considera para a ordenação a partir do campo, m1 posição m2 sendo a primeira posição "0 zero"
+
+	-n.m Considera para ordenação até o campo n2, posição m2, sendo a primeira opção Zero
+
+	-t sep
+
+	-m Intercala dois arquivos já ordenados, escrevendo a intercalação na saída padrão (Join de 2 arquivos ordenados)
+
+	-n Classificação numérica; Ordena por ordem numérica
+
+	-r Inverte a ordem
+
+	Obs. Se o separador não for especificado, o padrão será branco e tab porém para efeito de contagem, farão parte do campo.
+	Assm como a posição 0 será o primeiro delimitador.
+
+$ head [-numero] [-cn] [arquivo]
+
+	Pode apresentar o arquivo ou a entrada padrão stdin
+
+	-numero mostra a quantidade de linhas especificadas em número, se for omitido, apresenta 10 linhas
+
+	-c --bytes=tamanho mostra os primeiros caracteres em byte, pode ser usado um multiplicados [b, k ,m] byte, kbyte e mbyte.
+
+	-n número de linha idêtico a opção -numero.
+
+$ tail [+|- numero] [-cnf] [arquivo]
+
+	Mostra o final dos arquivos em linhas, se o arquivo for omitido, tail lê a entreda padrão.
+
+	+numero Mostra o arquivo a partir da linha X esécificadda.
+
+	-numero mostra as X ultimas linhas do arquivo
+
+	-c --byte Mostra os ultimos arquivos em X byte, kbyte ou mbyte.
+
+	-f Mostra na tela as linhas finais do arquivo na medida que ele cresce. 
+
+	Ótimo para visualização de arquivos de log.
 
 
+--------------------------------------------------------------------------------------------------------------------------------------
+											SEGURANÇA NOS ACESSOS
+--------------------------------------------------------------------------------------------------------------------------------------
+
+PERMISSIONAMENTO DE ARQUIVOS
+
+ $ chown [-f] [-R] dono arquivo
+
+ 	-f Não reporta erros caso ocorram
+
+ 	-R Executa recursivamente
+
+ 	Troca o dono do arquivo
+ 	Usando a sintaxe [$chown nomedodono:nomedoarquivo arquivo] Ele modifica tanto o dono quando o grupo do arquivo.
+
+ $ chgrp [-f] [-R] grupo arquivo 
+
+ 	Troca o grupo do arquivo
+
+ 	Alteração de incluão de usuários em grupos, só pode ser feita por superusupário ou outros usuários que tenham permissão de 
+ 	modificar o arquivo de grupos.
+
+ 	Tem sintaxe parecida com o chown e somente o superusuário pode executar na maioria dos sistemas.
+
+
+TIPOS DE ARQUIVOS
+
+	r = read = leitura
+	w = write = Escrita/gravação
+	x = Exec = Execussão como Script ou Programa
+
+	No entando vale lembrar que para alterar um arquivo a permissão de leitura também deve estar habilitada, pois para alterar ele precisa
+	ler o arquivo.
+
+	Para programas executáveis basta a permissão de execussão.
+
+	ls -l para verificar as permissões de um arquivo, lista no formato longo
+
+		drwxrwxr-x [d = tipo do arquivo(diretorio), rwx (Permissões para dono (u)) | rwx (Permissões para grupo) (g)| rwx (Permissões para outros (o))]
+		
+	Alterando as permissões de um arquivo
+
+	$ chmod String de acesso(Configurações das permissões) arquivo ...
+		chmod u+w /var/arquivo.txt
+		Acrecenta a opção escrita nas configurações de permissão de dono do arquivo
+
+		Os sinais + ou - adiciona ou remove as características
+
+		Podemos também permissionar arquivos através de números, seguindo a notação abaixo:
+
+		rwx w-x r--  (Letras)
+
+		||| |0| |00  (Binários)
+
+		 7	 5	4	 (Decimal)	
+
+		 777 = rwxrwxrwx (não é bom usar essa configuração)
+
+
+INFORMAÇÕES SOBRE OS USUÁRIOS
+
+Comandos para administrar usuários
+
+$ who [Informações de usuários que estão ativos]
+
+	-am i Informações de login do próprio usuário
+	-m o mesmo que a opção acima
+	-H Mostra cabeçalho
+	-a Mostra diversas informações sobre o sistema e seus usuários
+
+$ id [Informa o id dos usuários ativos]
+
+	-n mostra o nome do usuário e grupos ao invés do identificado numérico, 
+	porém para tal deve ser usando com o -u -g -G	
+
+$ finger [Exibe informações mais detalhadas sobre os usuários]
+
+	Como comando finger conseguimos informações dos usuários, inclusive com o campo comentário no arquivo /etc/passwd
+
+	Alterar informações dos usuários, $chnf [Altera nome do usuário, localização, telefone, informações adicionais]
+
+$ groups [Informa quais grupos o usuário pertence]
+	
+	$ groups [apresenta a lista de grupos de usupários]
+
+	$ groups fernanda [Apresenta a lista de grupos que fernanda daz parte]
+
+
+------------------------------------------------------------------------------------------------------------------------------
+									COMANDOS PARA TRABALHAR COM DATA, HORA E CALENDÁRIO
+------------------------------------------------------------------------------------------------------------------------------
+
+$ date [mostra e acerta a data do s
+
+	$ date "+D"
+	$ date date "+Hoje a data é: %d/%m/%y%n e a hora é: %T"
+
+	-s usando quando desejamos acertar a data e hoje do sistema. Só pode ser usado pelo super usuário
+		%n Quebra de linha
+		%t Tabulação
+		%m Mês
+		%d Dia
+		%y Ano com 2 dígitos
+		%Y Ano com 4 dígitos
+		%D Data no formato DD/DD/AA
+		%H Hora
+		%M Minuto
+		%S Segundo
+		%T Hora no formato HH:MM:SS
+		%j Dia do ano
+		%W Dia da Semana (Dom=0 a Sáb=6)
+		%a Dia da semana abreviado
+		%h Mês do ano
+
+		Podemos pegar data anteriores usando esse comando.
+
+$ cal [Mostra o calendário de um mês ou ano espedífico]
+
+	Onde mês é o número de 1 a 12 e ano no formato de 4 algarísmos.
+
+	$ cal 04 2000
+
+	$ cal 1970
+
+	
+-----------------------------------------------------------------------------------------------------------------------------
+								COMANDOS DE BACKUP
+-----------------------------------------------------------------------------------------------------------------------------
+
+Comandos de backup e compressão
+
+tar - [Para agrupar vários arquivos em somente um]
+
+compress - [Utilitários de compressão de arquivos]
+
+Uncompress - [Descomprime arquivos compactados pelo compress]
+
+zcat - [Permite visualizar o conteúdo de arquivos com compress]
+
+gzip - [É o utilitário de compreensão de arquivos padrão do Linux]
+
+gunzip - [Descomprime arquivos compactados pelo zip]
+
+
+$ tar
+
+	tar [-cfprtuvx] [arquivo_tar] [arquivo....]
+	
+
+		
 
 
 
